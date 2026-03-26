@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir /hiddify-data/ssl/
+mkdir -p /hiddify-data/ssl/
 rm -rf /opt/hiddify-manager/log/*.lock
 
 # Check and set REDIS_URI_MAIN
