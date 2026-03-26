@@ -3,6 +3,24 @@
 mkdir -p /hiddify-data/ssl/
 rm -rf /opt/hiddify-manager/log/*.lock
 
+# Wait for MariaDB to accept TCP connections before panel initialization.
+if [ -z "$SQLALCHEMY_DATABASE_URI" ]; then
+  db_host="mariadb"
+  db_port="3306"
+else
+  db_host=$(echo "$SQLALCHEMY_DATABASE_URI" | sed -n "s#.*@\([^:/?]*\).*#\1#p")
+  db_port=$(echo "$SQLALCHEMY_DATABASE_URI" | sed -n "s#.*@[^:/?]*:\([0-9][0-9]*\).*#\1#p")
+  db_port=${db_port:-3306}
+fi
+
+for i in $(seq 1 60); do
+  if (echo >/dev/tcp/$db_host/$db_port) >/dev/null 2>&1; then
+    break
+  fi
+  echo "Waiting for MySQL at ${db_host}:${db_port} (${i}/60)..."
+  sleep 2
+done
+
 # Check and set REDIS_URI_MAIN
 if [ -z "$REDIS_URI_MAIN" ]; then
   if [ -z "$REDIS_PASSWORD" ]; then
