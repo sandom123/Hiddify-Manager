@@ -90,7 +90,7 @@ function update_panel() {
             # uv pip install -U --no-deps --force-reinstall hiddify-panel/src
             uv pip install /opt/hiddify-manager/hiddify-panel/src 
             uv pip install -U bjoern celery
-            # pip install -U hiddifypanel
+            uv pip install -U hiddifypanel
         ;;
         v*)
             update_progress "Updating..." "Hiddify Panel from $current_panel_version to $latest" 10
