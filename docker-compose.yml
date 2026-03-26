@@ -34,7 +34,7 @@ services:
     #network_mode: host
     depends_on:
       mariadb:
-        condition: service_healthy
+        condition: service_started
       redis:
         condition: service_started
 
@@ -48,12 +48,6 @@ services:
       MARIADB_RANDOM_ROOT_PASSWORD: 1       # Root user password
       MYSQL_DATABASE: hiddifypanel             
       MYSQL_USER: hiddifypanel                     
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
-      interval: 5s
-      timeout: 5s
-      retries: 30
-      start_period: 20s
     volumes:
       - ./docker-data/mariadb_data:/var/lib/mysql          # Persistent storage for database files
 
