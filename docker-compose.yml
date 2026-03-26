@@ -27,7 +27,7 @@ services:
       - path: ./docker.env
     environment:
       #REDIS_PASSWORD used if REDIS_URI_MAIN or REDIS_URI_SSH is not set
-      MYSQL_PASSWORD: 'OiJIUzI1NiIsInR5cC'
+      #MYSQL_PASSWORD used if SQLALCHEMY_DATABASE_URI is not set
       #REDIS_URI_MAIN: 'redis://:${REDIS_PASSWORD}@redis:6379/0' 
       #REDIS_URI_SSH: 'redis://:${REDIS_PASSWORD}@redis:6379/1'
       #SQLALCHEMY_DATABASE_URI: 'mysql+mysqldb://hiddifypanel:${MYSQL_PASSWORD}@mariadb/hiddifypanel?charset=utf8mb4'
