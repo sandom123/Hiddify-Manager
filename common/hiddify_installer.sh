@@ -89,6 +89,7 @@ function update_panel() {
             # install_python310
             # uv pip install -U --no-deps --force-reinstall hiddify-panel/src
             uv pip install /opt/hiddify-manager/hiddify-panel/src 
+            uv pip install -U bjoern celery
             # pip install -U hiddifypanel
         ;;
         v*)
